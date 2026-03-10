@@ -2,7 +2,7 @@
 title: "Padavan 4.4 (The Dave Täht Tribute Edition)"
 description: "A tribute to the soul of bufferbloat mitigation."
 url: "https://tw641.github.io"
-baseurl: "/padavan-4.4
+baseurl: "/padavan-4.4"
 github_url: "https://github.com/TW641/padavan-4.4"
 
 # 強制開啟 GFM 引擎與自動生成 ID (確保 TOC 單頁跳轉完美生效)
