@@ -197,6 +197,14 @@
     </main>
 
     <footer class="footer">
+        <div class="memorial-section" style="margin-bottom: 20px; font-size: 0.95em; color: var(--text-color);">
+            <p style="margin: 5px 0;">
+                ⭐ Dave Täht passed away on 2025.04.01. Today is <span id="current-date"></span>.
+            </p>
+            <p style="margin: 5px 0;">
+                🌠 Illuminating the open-source universe for <strong id="total-days" style="color: var(--link-color); font-size: 1.1em;"></strong> days <span style="color: var(--text-muted);">(<span id="ymd-breakdown"></span>)</span>.
+            </p>
+        </div>
         <p>© <span id="year"></span> TW641. Built with passion for a Bufferbloat-free world.</p>
     </footer>
 
@@ -206,6 +214,42 @@
 
     <script>
         document.getElementById("year").textContent=new Date().getFullYear();
+        
+        const startDate=new Date('2025-04-01T00:00:00');
+        const now=new Date();
+        const currentYear=now.getFullYear();
+        const currentMonth=String(now.getMonth()+1).padStart(2,'0');
+        const currentDay=String(now.getDate()).padStart(2,'0');
+        
+        document.getElementById("current-date").textContent=`${currentYear}.${currentMonth}.${currentDay}`;
+        
+        const diffTime=now-startDate;
+        const totalDays=Math.floor(diffTime/(1000*60*60*24));
+        
+        if(totalDays>=0){
+            document.getElementById("total-days").textContent=totalDays;
+            let years=currentYear-startDate.getFullYear();
+            let months=now.getMonth()-startDate.getMonth();
+            let days=now.getDate()-startDate.getDate();
+            if(days<0){
+                months--;
+                const prevMonth=new Date(now.getFullYear(),now.getMonth(),0);
+                days+=prevMonth.getDate();
+            }
+            if(months<0){
+                years--;
+                months+=12;
+            }
+            let breakdownStr='';
+            if(years>0) breakdownStr+=`${years} 年 (Y) `;
+            if(months>0||years>0) breakdownStr+=`${months} 個月 (M) `;
+            breakdownStr+=`${days} 天 (D)`;
+            document.getElementById("ymd-breakdown").textContent=breakdownStr;
+        }else{
+            document.getElementById("total-days").textContent="0";
+            document.getElementById("ymd-breakdown").textContent="0 天 (D)";
+        }
+
         const themeToggleBtn=document.getElementById('theme-toggle');
         const rootElement=document.documentElement;
         const currentTheme=localStorage.getItem('theme');
