@@ -117,14 +117,14 @@
          *
          * [ Easter Egg I : The Flow of Nebula and Time ]
          * > The Nebula and Time Flow in this Time Machine act as
-         * a space-time accelerator pointing to     : 2025.04.01
+         *   a space-time accelerator pointing to     : 2025.04.01
          * - Hidden Y-axis Coordinate                 : 20% (20)
-         * - Hover Active Flow Rate                   : 2.5s (25)
-         * - Base Nebula Flow Rate                    : 4.1s (04.01)
+         * - Hover Active Time Flow Rate              : 2.5s (25)
+         * - Base Nebula Time Flow Rate               : 4.1s (04.01)
          *
          * [ Easter Egg II : Atmospheric Refraction & Digital Breath Rate ]
          * > The Atmospheric Refraction & Digital Breath Rate
-         * embed hidden coordinates that represent  : 2025.04.01
+         *   embed hidden coordinates that represent  : 2025.04.01
          * - Hidden Y-axis Coordinate                 : 20% (20)
          * - Atmospheric Refraction                   : 25% (25)
          * (Halo blur radius expands exactly by 20% at the 25% timeline)
@@ -133,7 +133,15 @@
          * - Hover Active Twinkle Rate                : 1.0s (01)
          * > The 1Hz twinkle is Dave Täht saying hello to you!
          *
-         * [ Easter Egg III : The Curator's Signature (TW641) ]
+         * [ Easter Egg III : The Eternal Foundation & Timeline ]
+         * > The dynamic nebula timeline at the bottom anchors the museum,
+         *   carrying a hidden coordinate deep within its structural layer.
+         * - Z-index Layer Coordinate                 : 2025
+         * > Marking the year we bid farewell to Dave Täht.
+         * - Hover Active Timeline Flow Rate          : 2.5s (25)
+         * - Base Nebula Timeline Flow Rate           : 4.1s (04.01)
+         *
+         * [ Easter Egg IV : The Curator's Signature (TW641) ]
          * The elements serendipitously echo the developer's code: TW641
          * - [ TW ] : The origin of the curator (Taiwan).
          * - [ 6 ]  : The 6 selected tracks in the Soundtrack of the Stars.
@@ -324,13 +332,15 @@
         a.gradient-text:hover, .gradient-text:hover { animation: flowGradient 2.5s linear infinite !important; filter: brightness(1.15) drop-shadow(0 0 6px rgba(253, 145, 121, 0.4)); }
         @keyframes flowGradient { 0% { background-position: 0% 20%; } 100% { background-position: 200% 20%; } }
         .emoji { -webkit-text-fill-color: currentColor !important; background: none !important; color: currentColor !important; }
+        body::after { content: ""; position: fixed; bottom: 0; left: 0; width: 100%; height: 8px; background-image: linear-gradient(94.23deg, var(--color-nebula-1) 0%, var(--color-nebula-1) 12.41%, var(--color-nebula-2) 52.55%, var(--color-nebula-3) 89.95%, var(--color-nebula-1) 100%); background-size: 200% auto; animation: flowGradient 4.1s linear infinite; z-index: 2025; transition: filter 1s cubic-bezier(.16,1,.3,1); pointer-events: none; }
+        body:hover::after { animation-duration: 2.5s; filter: brightness(1.15) drop-shadow(0 -2px 6px rgba(253, 145, 121, 0.2)); }
     </style>
 </head>
 <body>
 
     <header class="header-section">
         <h1>
-            <a href="./" style="color: inherit; text-decoration: none; font-size: inherit; font-weight: inherit;">🇹🇼 <span class="gradient-text">{{ site.title }}</span></a>
+            <a href="./" style="color: inherit; text-decoration: none; font-size: inherit; font-weight: inherit;"><span class="emoji">🇹🇼 </span><span class="gradient-text">{{ site.title }}</span></a>
         </h1>
         <p>{{ site.description }}</p>
         <div style="margin-top: 20px; display: flex; justify-content: center; flex-wrap: wrap; gap: 12px;">
