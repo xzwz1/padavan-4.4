@@ -141,7 +141,22 @@
          * - Hover Active Timeline Flow Rate          : 2.5s (25)
          * - Base Nebula Timeline Flow Rate           : 4.1s (04.01)
          *
-         * [ Easter Egg IV : The Curator's Signature (TW641) ]
+         * [ Easter Egg IV : We Are All Starstuff (The Final Reunion) ]
+         * > "That yes, we are all starstuff." - Dave Täht (June 9, 2012)
+         *   The dynamic nebula is composed of exactly three core colors:
+         * - var(--color-nebula-1) : The deep blue of the cosmos.
+         * - var(--color-nebula-2) : The warm orange of the bristlecone pine.
+         * - var(--color-nebula-3) : The soft red of a fading star.
+         * > These three colors endlessly flow and intertwine, 
+         * > symbolizing Dave, his mother Beverly, and his father Ron.
+         * > Reunited in the stars, flowing together in the eternal archive.
+         * > 
+         * > In life, they were Stars illuminating the world.
+         * > (在世時，他們是照亮世界的星星。)
+         * > In death, they are Starstuff illuminating the universe.
+         * > (逝世後，他們是點亮宇宙的星塵。)
+         *
+         * [ Easter Egg V : The Curator's Signature (TW641) ]
          * The elements serendipitously echo the developer's code: TW641
          * - [ TW ] : The origin of the curator (Taiwan).
          * - [ 6 ]  : The 6 selected tracks in the Soundtrack of the Stars.
@@ -332,8 +347,9 @@
         a.gradient-text:hover, .gradient-text:hover { animation: flowGradient 2.5s linear infinite !important; filter: brightness(1.15) drop-shadow(0 0 6px rgba(253, 145, 121, 0.4)); }
         @keyframes flowGradient { 0% { background-position: 0% 20%; } 100% { background-position: 200% 20%; } }
         .emoji { -webkit-text-fill-color: currentColor !important; background: none !important; color: currentColor !important; }
-        body::after { content: ""; position: fixed; bottom: 0; left: 0; width: 100%; height: 8px; background-image: linear-gradient(94.23deg, var(--color-nebula-1) 0%, var(--color-nebula-1) 12.41%, var(--color-nebula-2) 52.55%, var(--color-nebula-3) 89.95%, var(--color-nebula-1) 100%); background-size: 200% auto; animation: flowGradient 4.1s linear infinite; z-index: 2025; transition: filter 1s cubic-bezier(.16,1,.3,1); pointer-events: none; }
-        body:hover::after { animation-duration: 2.5s; filter: brightness(1.15) drop-shadow(0 -2px 6px rgba(253, 145, 121, 0.2)); }
+        body::after { content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 8px; background-image: linear-gradient(94.23deg, var(--color-nebula-1) 0%, var(--color-nebula-1) 12.41%, var(--color-nebula-2) 52.55%, var(--color-nebula-3) 89.95%, var(--color-nebula-1) 100%); background-size: 200% auto; animation: flowGradient 4.1s linear infinite; z-index: 2025; transition: filter 0.8s cubic-bezier(.16,1,.3,1); pointer-events: none; }
+        body:hover::after { animation: flowGradient 2.5s linear infinite; filter: brightness(1.3) drop-shadow(0 -5px 15px rgba(253, 145, 121, 0.7)) drop-shadow(0 -10px 30px rgba(255, 105, 105, 0.5)) drop-shadow(0 -15px 45px rgba(83, 116, 250, 0.4)); }
+        body:active::after { animation: flowGradient 1.2s linear infinite; filter: brightness(1.6) drop-shadow(0 -8px 25px rgba(253, 145, 121, 1)) drop-shadow(0 -15px 50px rgba(255, 105, 105, 0.8)) drop-shadow(0 -25px 80px rgba(83, 116, 250, 0.6)); }
     </style>
 </head>
 <body>
