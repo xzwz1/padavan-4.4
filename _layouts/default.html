@@ -298,7 +298,7 @@
         .desktop-inline { display: inline; }
         .markdown-body { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 30px; margin-bottom: 30px; box-shadow: 0 4px 12px rgba(0,0,0,0.05); overflow: hidden; transition: transform 0.2s, box-shadow 0.2s; }
         .markdown-body:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); }
-        .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4 { border-bottom: 1px solid var(--border-color); padding-bottom: 8px; margin-top: 24px; margin-bottom: 16px; position: relative; display: flex; align-items: center; }
+        .markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4 { border-bottom: 1px solid var(--border-color); padding-bottom: 8px; margin-top: 24px; margin-bottom: 16px; position: relative; }
         .markdown-body blockquote { border-left: 4px solid var(--link-color); padding: 15px; color: var(--text-color); margin: 0 0 16px 0; background-color: var(--bg-color); border-radius: 4px; font-size: 0.95em; }
         .markdown-body hr { height: 1px; padding: 0; margin: 24px 0; background-color: var(--border-color); border: 0; }
         .markdown-body code { background-color: var(--table-header); padding: 2px 6px; border-radius: 4px; font-family: monospace; font-size: 0.9em; color: var(--link-color); }
@@ -323,7 +323,7 @@
         @keyframes starTwinkleDark { 0%, 100% { opacity: 1; text-shadow: 0 0 10px rgba(88, 166, 255, 0.6), 0 0 20px rgba(88, 166, 255, 0.2); } 25% { opacity: 0.8; text-shadow: 0 0 12px rgba(88, 166, 255, 0.8), 0 0 24px rgba(88, 166, 255, 0.4); } }
         a.gradient-text:hover, .gradient-text:hover { animation: flowGradient 2.5s linear infinite !important; filter: brightness(1.15) drop-shadow(0 0 6px rgba(253, 145, 121, 0.4)); }
         @keyframes flowGradient { 0% { background-position: 0% 20%; } 100% { background-position: 200% 20%; } }
-        .emoji { -webkit-text-fill-color: currentColor !important; background: none !important; color: currentColor !important; }
+        .emoji { -webkit-text-fill-color: initial !important; background: none !important; color: initial !important; }
     </style>
 </head>
 <body>
@@ -433,7 +433,8 @@
                 heading.classList.add('gradient-text');
             });
             document.querySelectorAll('.markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4, .markdown-body h5, .markdown-body h6').forEach(function(heading) {
-                if (heading.id) {
+                // 修正1: 加上 !heading.querySelector('.anchor') 防止重複產生錨點
+                if (heading.id && !heading.querySelector('.anchor')) {
                     heading.classList.add('heading-with-anchor');
                     let anchor = document.createElement('a');
                     anchor.className = 'anchor';
@@ -450,6 +451,8 @@
             const matchRegex = new RegExp("^(" + escapedKw.join("|") + ")$", "i");
             const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
                 acceptNode: function(node) {
+                    // 修正2: 加上 !node.parentNode 檢查，防止腳本因為讀取空節點的 classList 報錯崩潰
+                    if (!node.parentNode) return NodeFilter.FILTER_REJECT; 
                     if (node.parentNode.classList && node.parentNode.classList.contains('glow-text')) return NodeFilter.FILTER_REJECT;
                     if (['SCRIPT', 'STYLE', 'TITLE', 'NOSCRIPT'].includes(node.parentNode.nodeName)) return NodeFilter.FILTER_REJECT;
                     if (testRegex.test(node.nodeValue)) return NodeFilter.FILTER_ACCEPT;
@@ -462,6 +465,8 @@
                 nodesToReplace.push(currentNode);
             }
             nodesToReplace.forEach(node => {
+                // 修正3: 在替換節點前確認父節點存在，確保 replaceChild 順利執行
+                if (!node.parentNode) return; 
                 const fragment = document.createDocumentFragment();
                 const parts = node.nodeValue.split(searchRegex);
                 parts.forEach(part => {
