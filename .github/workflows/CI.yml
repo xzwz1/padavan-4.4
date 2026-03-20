@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       target_select:
-        description: "選擇機型 (Target Model)"
+        description: "选择机型 (Target Model)"
         required: true
         type: choice
         options:
